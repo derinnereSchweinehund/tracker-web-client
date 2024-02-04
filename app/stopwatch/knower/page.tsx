@@ -116,7 +116,7 @@ let w = 10;
 let cols: number, rows: number;
 
 function sketch(p: p5) {
-    p.frameRate(60)
+    p.frameRate(30)
     // p is a reference to the p5 instance this sketch is attached to
     p.setup = function() {
         p.createCanvas(410, 820);
@@ -137,7 +137,7 @@ function sketch(p: p5) {
 
         let nextGrid = new Grid(cols, rows);
         if (bias) {
-            for (let i = grid.width-1; i > 0; i--) {
+            for (let i = grid.width-1; i >= 0; i--) {
                 for (let j = 0; j < grid.height; j++) {
                     if (grid.isSand(i, j)) {
                         count+=1
@@ -194,7 +194,6 @@ function sketch(p: p5) {
             }
         }
         grid = nextGrid;
-        console.log(count)
     }
     p.mouseDragged = function () {
         if (p.mouseX && p.mouseY)
