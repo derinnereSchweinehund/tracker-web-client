@@ -9,7 +9,7 @@ let timePaused: number = 0;
 export default function Home() {
   const [active, setActive] = useState(true)
   const [update, setUpdate] = useState(0)
-  const [countDownTime, setCountDownTime] = useState(216000)
+  const [countDownTime, setCountDownTime] = useState(86400)
 
   const startStopWatch = () => {
     startTime = new Date().getTime();
@@ -43,7 +43,7 @@ export default function Home() {
   function process(n: number): string {
     let sec = helppro(n%60);
     let min = helppro(~~(n/60)%60);
-    let hrs = helppro(~~(n/60/60/60));
+    let hrs = helppro(~~(n/3600));
 
     return hrs + ":" + min + ":" + sec;
   }
@@ -54,7 +54,8 @@ export default function Home() {
         <input 
           value={countDownTime} 
           onChange={ e => {
-              setCountDownTime(Number(e.target.value.replace(/\D/,'')));
+            let val = Number(e.target.value.replace(/\D/,''))
+            val < 86400 ? setCountDownTime(val) : setCountDownTime(countDownTime);
             }
              }
           />
