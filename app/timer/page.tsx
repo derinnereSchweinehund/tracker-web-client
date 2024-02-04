@@ -6,19 +6,19 @@ let stopWatchInterval: NodeJS.Timeout;
 
 let startTime: number;
 let timePaused: number = 0;
-
 export default function Home() {
   const [active, setActive] = useState(true)
   const [update, setUpdate] = useState(0)
+  const [countDownTime, setCountDownTime] = useState(216000)
 
   const startStopWatch = () => {
     startTime = new Date().getTime();
-    setActive(!active);
-    stopWatchInterval = setInterval(updateStopWatch, 1000);
+    setActive(false);
+    stopWatchInterval = setInterval(updateStopWatch, 100);
   }
 
   const stopStopWatch = () => {
-    setActive(!active);
+    setActive(true);
     clearInterval(stopWatchInterval);
     timePaused += new Date().getTime() - startTime;
   }
@@ -33,13 +33,34 @@ export default function Home() {
     setUpdate(timePaused + new Date().getTime() - startTime);
   }
 
+  function helppro(n: number): string {
+    if (n<10) {
+      return "0"+String(n)
+    }
+    return String(n)
+  }
+
+  function process(n: number): string {
+    let sec = helppro(n%60);
+    let min = helppro(~~(n/60)%60);
+    let hrs = helppro(~~(n/60/60/60));
+
+    return hrs + ":" + min + ":" + sec;
+  }
+
   return (
     <main>
-        Timer
-        {~~(update/1000)}
-        <button className="btn-blue" disabled={!active} onClick={startStopWatch}> Start </button>
+        {process(countDownTime-~~(update/1000))}
+        <input 
+          value={countDownTime} 
+          onChange={ e => {
+              setCountDownTime(Number(e.target.value.replace(/\D/,'')));
+            }
+             }
+          />
+        <button className="btn-blue" disabled={!active} onClick={startStopWatch}> Play </button>
         <button className="btn" disabled={active} onClick={stopStopWatch}> Pause </button>
-        <button className="btn" disabled={active} onClick={resetStopWatch}> Reset </button>
+        <button className="btn" disabled={!update} onClick={resetStopWatch}> Reset </button>
     </main>
   );
 }
