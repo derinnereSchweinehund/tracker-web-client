@@ -11,6 +11,7 @@ export default function NavBar() {
             <Link href="/stopwatch"> Stopwatch </Link>
             <Link href="/stopwatch/knower"> Sand </Link>
             <Link href="/timer"> Timer </Link>
+            <Link href="/reader"> Reader </Link>
         </div>
     )
 };
