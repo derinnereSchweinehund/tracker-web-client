@@ -1,7 +1,9 @@
 "use client"
 
-import { useEffect, useState, useRef, DetailedHTMLProps, AudioHTMLAttributes, MutableRefObject, LegacyRef } from "react"
+import { useEffect, useState, useRef } from "react"
 
+
+//note this uses local storage which has a 5MB cap meaning that perhaps at some point, a user must clear their cache to continue saving
 
 //let audioFile: string; //React.RefObject<HTMLInputElement>= React.createRef();
 export default function Reader() {
