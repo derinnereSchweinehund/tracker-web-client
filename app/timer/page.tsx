@@ -27,6 +27,7 @@ export default function Home() {
     setUpdate(0);
     stopStopWatch();
     timePaused = 0;
+    
   }
 
   const updateStopWatch = () => {
@@ -34,34 +35,45 @@ export default function Home() {
   }
 
   function helppro(n: number): string {
-    if (n<10) {
-      return "0"+String(n)
-    }
-    return String(n)
+    return n < 10 ? n < 0 ? "00" : "0"+String(n) : String(n)
   }
 
   function process(n: number): string {
     let sec = helppro(n%60);
     let min = helppro(~~(n/60)%60);
     let hrs = helppro(~~(n/3600));
-
+    
+    if (!active && countDownTime-~~(update/1000) < 0) {
+      if (!active) {
+        setActive(!active);
+        requestAnimationFrame(() => {
+          document.body.style.backgroundColor = "red";
+          requestAnimationFrame(() => {resetStopWatch(); alert("TIMER DONE"); document.body.style.backgroundColor = ""});
+        });      
+        
+      }
+    } //  intervals dont update internal variables to global state
     return hrs + ":" + min + ":" + sec;
   }
 
   return (
     <main>
+      <p className="text-[100px] m-5">
         {process(countDownTime-~~(update/1000))}
-        <input 
+      </p>       
+      <p>        
+        <input className="m-5 text-[gray]"
           value={countDownTime} 
           onChange={ e => {
             let val = Number(e.target.value.replace(/\D/,''))
             val < 86400 ? setCountDownTime(val) : setCountDownTime(countDownTime);
             }
-             }
-          />
-        <button className="btn-blue" disabled={!active} onClick={startStopWatch}> Play </button>
-        <button className="btn" disabled={active} onClick={stopStopWatch}> Pause </button>
-        <button className="btn" disabled={!update} onClick={resetStopWatch}> Reset </button>
+          }
+        />
+      </p> 
+    <button className="border rounded-full px-4 py-2 bg-blue-500 hover:bg-green-500 disabled:bg-slate-600 m-5" disabled={!active} onClick={startStopWatch}> Play </button>
+    <button className="border rounded-full px-4 py-2 bg-blue-500 hover:bg-green-500 disabled:bg-slate-600 m-5" disabled={active} onClick={stopStopWatch}> Pause </button>
+    <button className="border rounded-full px-4 py-2 bg-blue-500 hover:bg-green-500 disabled:bg-slate-600 m-5" disabled={!update} onClick={resetStopWatch}> Reset </button>
     </main>
   );
 }

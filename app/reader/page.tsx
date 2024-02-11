@@ -58,7 +58,7 @@ export default function Reader() {
         </div>
         <audio controls onTimeUpdate={setTime} id="audioBox" src={audioFile+`#t=${getPlayTime()}`} ref={node => {
         if (node) {time.current = node}
-      }}> </audio>
+      }} className="audio" />
         <input type="file" accept="audio/*" id="fileBox" onChange={handleFileUpload} />
         <p id="buttonBar">
                 <button onClick={() => adjustTime(-3600)} id="back60" title="Rewind one hour"> -60m </button>

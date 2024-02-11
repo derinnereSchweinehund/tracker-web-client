@@ -15,6 +15,10 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+/* 
+main{
+  padding: 1vw;
+} */
 
 body {
   color: rgb(var(--foreground-rgb));
@@ -24,6 +28,11 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+navbar{
+  margin: 0 auto;
+  color:  teal;
 }
 
 @layer utilities {
@@ -44,4 +53,8 @@ body {
 }
 .btn-blue:hover {
   @apply bg-blue-700;
+}
+
+.audio {
+  width: 100vw;
 }

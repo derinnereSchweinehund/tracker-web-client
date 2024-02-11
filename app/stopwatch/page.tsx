@@ -34,26 +34,23 @@ export default function Home() {
   }
 
   function helppro(n: number): string {
-    if (n<10) {
-      return "0"+String(n)
-    }
-    return String(n)
+    return n < 10 ? n < 0 ? "00" : "0"+String(n) : String(n)
   }
 
   function process(n: number): string {
     let sec = helppro(n%60);
     let min = helppro(~~(n/60)%60);
     let hrs = helppro(~~(n/3600));
-
     return hrs + ":" + min + ":" + sec;
   }
 
   return (
     <main>
-        {process(~~(update/1000))}
-        <button className="btn-blue" disabled={!active} onClick={startStopWatch}> Play </button>
-        <button className="btn" disabled={active} onClick={stopStopWatch}> Pause </button>
-        <button className="btn" disabled={!update} onClick={resetStopWatch}> Reset </button>
+        <p className="text-[100px]">{process(~~(update/1000))}</p>
+        
+        <button className="bg-blue-500 hover:bg-green-500 disabled:bg-slate-600 m-5" disabled={!active} onClick={startStopWatch}> Play </button>
+        <button className="bg-blue-500 hover:bg-green-500 disabled:bg-slate-600 m-5" disabled={active} onClick={stopStopWatch}> Pause </button>
+        <button className="bg-blue-500 hover:bg-green-500 disabled:bg-slate-600 m-5" disabled={!update} onClick={resetStopWatch}> Reset </button>
     </main>
   );
 }
