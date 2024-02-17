@@ -1,7 +1,8 @@
 NextJS project playing around with some features
 
--Timer
--Stopwatch
+*Timer
+*Stopwatch
 -Audio Player (with save point)
 -Sand simulator
--Notes page
+*Notes page
+
